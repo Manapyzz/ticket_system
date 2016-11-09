@@ -25,10 +25,21 @@
                 <th>Updated</th>
                 <td>{% if ticket.updated %}{{ ticket.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
+            <tr>
+                <th>Answers :</th>
+                {% for answer in answers %}
+                    <td>{{ answer.content }} Created: </td>
+                    <td>{{ answer.created|date('Y-m-d') }}</td>
+                    <td><a href="{{ path('answer_edit', {'id': answer.id, 'ticket_id': ticket.id }) }}">Edit answer</a></td>
+                {% endfor %}
+            </tr>
         </tbody>
     </table>
 
     <ul>
+        <li>
+            <a href="{{ path('answer_new', { 'ticket_id': ticket.id }) }}">New Message</a>
+        </li>
         <li>
             <a href="{{ path('ticket_index') }}">Back to the list</a>
         </li>

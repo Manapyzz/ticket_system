@@ -69,9 +69,12 @@ class TicketController extends Controller
     {
         $deleteForm = $this->createDeleteForm($ticket);
 
+        $answers = $ticket->getAnswers();
+
         return $this->render('ticket/show.html.twig', array(
             'ticket' => $ticket,
             'delete_form' => $deleteForm->createView(),
+            'answers' => $answers
         ));
     }
 
