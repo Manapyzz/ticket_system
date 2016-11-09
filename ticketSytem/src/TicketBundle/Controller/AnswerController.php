@@ -17,23 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 class AnswerController extends Controller
 {
     /**
-     * Lists all answer entities.
-     *
-     * @Route("/", name="answer_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $answers = $em->getRepository('TicketBundle:Answer')->findAll();
-
-        return $this->render('answer/index.html.twig', array(
-            'answers' => $answers,
-        ));
-    }
-
-    /**
      * Creates a new answer entity.
      *
      * @Route("/new/{ticket_id}", name="answer_new")
@@ -73,7 +56,7 @@ class AnswerController extends Controller
      */
     public function editAction(Request $request, Answer $answer, $ticket_id)
     {
-        $deleteForm = $this->createDeleteForm($answer);
+        $deleteForm = $this->createDeleteForm($answer, $ticket_id);
         $editForm = $this->createForm('TicketBundle\Form\AnswerType', $answer);
         $editForm->handleRequest($request);
 
@@ -99,7 +82,7 @@ class AnswerController extends Controller
      */
     public function deleteAction(Request $request, Answer $answer, $ticket_id)
     {
-        $form = $this->createDeleteForm($answer);
+        $form = $this->createDeleteForm($answer, $ticket_id);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -118,10 +101,10 @@ class AnswerController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Answer $answer)
+    private function createDeleteForm(Answer $answer, $ticket_id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('answer_delete', array('id' => $answer->getId())))
+            ->setAction($this->generateUrl('answer_delete', array('id' => $answer->getId(), 'ticket_id' => $ticket_id)))
             ->setMethod('DELETE')
             ->getForm()
         ;

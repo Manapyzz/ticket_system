@@ -7,7 +7,13 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <header>
+            <a href="{{ path('ticket_index') }}">Return to all the tickets</a>
+        </header>
         {% block body %}{% endblock %}
+        <footer>
+            Ticket System Very Minimal Version Dirty Display
+        </footer>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

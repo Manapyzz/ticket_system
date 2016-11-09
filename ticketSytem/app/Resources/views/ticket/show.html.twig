@@ -28,8 +28,14 @@
             <tr>
                 <th>Answers :</th>
                 {% for answer in answers %}
-                    <td>{{ answer.content }} Created: </td>
-                    <td>{{ answer.created|date('Y-m-d') }}</td>
+                    <td>{{ answer.content }}</td>
+                    <td>
+                        {% if answer.updated is not null %}
+                            Updated on : {{ answer.updated|date('Y-m-d') }}
+                        {% else %}
+                            Created the : {{ answer.created|date('Y-m-d') }}
+                        {% endif %}
+                    </td>
                     <td><a href="{{ path('answer_edit', {'id': answer.id, 'ticket_id': ticket.id }) }}">Edit answer</a></td>
                 {% endfor %}
             </tr>
