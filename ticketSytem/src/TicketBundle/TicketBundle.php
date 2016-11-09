@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle;
+namespace TicketBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AppBundle extends Bundle
+class TicketBundle extends Bundle
 {
 }
