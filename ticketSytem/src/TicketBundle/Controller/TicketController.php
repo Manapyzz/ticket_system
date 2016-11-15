@@ -46,6 +46,7 @@ class TicketController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $ticket->setCreated(new \DateTime());
+            $ticket->addUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($ticket);
             $em->flush($ticket);

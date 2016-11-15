@@ -54,6 +54,16 @@ class Ticket
      * @ORM\OneToMany(targetEntity="Answer", mappedBy="ticket")
      */
     protected $answers;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", cascade={"persist"})
+     * @ORM\JoinTable(name="ticket_user",
+     *      joinColumns={@ORM\JoinColumn(name="ticket_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    private $users;
+
     /**
      * Constructor
      */
@@ -200,5 +210,39 @@ class Ticket
     public function getAnswers()
     {
         return $this->answers;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \TicketBundle\Entity\User $user
+     *
+     * @return Ticket
+     */
+    public function addUser(\TicketBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \TicketBundle\Entity\User $user
+     */
+    public function removeUser(\TicketBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

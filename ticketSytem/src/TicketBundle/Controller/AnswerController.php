@@ -29,6 +29,7 @@ class AnswerController extends Controller
             ->findOneById($ticket_id);
 
         $answer = new Answer();
+        $answer->addUser($this->getUser());
         $form = $this->createForm('TicketBundle\Form\AnswerType', $answer);
         $form->handleRequest($request);
 
