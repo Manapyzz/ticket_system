@@ -50,6 +50,13 @@ class Answer
     private $ticket;
 
     /**
+     * @var ticket
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="answers")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return integer
@@ -153,5 +160,29 @@ class Answer
     public function getTicket()
     {
         return $this->ticket;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \TicketBundle\Entity\User $user
+     *
+     * @return Answer
+     */
+    public function setUser(\TicketBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \TicketBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

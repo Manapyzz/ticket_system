@@ -95,7 +95,7 @@ class TicketController extends Controller
             $ticket->setUpdated(new \DateTime());
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('ticket_edit', array('id' => $ticket->getId()));
+            return $this->redirectToRoute('ticket_show', array('id' => $ticket->getId()));
         }
 
         return $this->render('ticket/edit.html.twig', array(

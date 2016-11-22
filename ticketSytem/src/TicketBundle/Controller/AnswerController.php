@@ -34,6 +34,7 @@ class AnswerController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $answer->setTicket($ticket);
+            $answer->setUser($this->getUser());
             $answer->setCreated(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->persist($answer);

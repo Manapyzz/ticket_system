@@ -10,4 +10,12 @@ namespace TicketBundle\Repository;
  */
 class TicketRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findIdsAndTitles() {
+        $qb = $this->createQueryBuilder('t')
+            ->select('t.id', 't.title');
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
 }

@@ -36,7 +36,9 @@
                             Created the : {{ answer.created|date('Y-m-d') }}
                         {% endif %}
                     </td>
+                {% if is_granted('ROLE_ADMIN') %}
                     <td><a href="{{ path('answer_edit', {'id': answer.id, 'ticket_id': ticket.id }) }}">Edit answer</a></td>
+                {% endif %}
                 {% endfor %}
             </tr>
         </tbody>
@@ -49,14 +51,16 @@
         <li>
             <a href="{{ path('ticket_index') }}">Back to the list</a>
         </li>
-        <li>
-            <a href="{{ path('ticket_edit', { 'id': ticket.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
+        {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="{{ path('ticket_edit', { 'id': ticket.id }) }}">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
                 <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+                {{ form_end(delete_form) }}
+            </li>
+        {% endif %}
     </ul>
 
 {% endblock %}

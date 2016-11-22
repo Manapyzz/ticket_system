@@ -56,7 +56,7 @@ class Ticket
     protected $answers;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="User")
      * @ORM\JoinTable(name="ticket_user",
      *      joinColumns={@ORM\JoinColumn(name="ticket_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}

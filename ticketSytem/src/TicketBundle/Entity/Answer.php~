@@ -48,5 +48,11 @@ class Answer
      * @ORM\JoinColumn(name="ticket_id", referencedColumnName="id")
      */
     private $ticket;
-}
 
+    /**
+     * @var ticket
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="answers")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+}

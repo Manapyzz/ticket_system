@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1>Assign ticket to users:</h1>
+
+
+
+    <form method="post">
+
+        <h2>Tickets:</h2>
+
+        {% for ticket in tickets %}
+            <input type="radio" name="ticket" value="{{ ticket.id }}">{{ ticket.title }}<br>
+        {% endfor %}
+
+        <br><br>
+
+        <h2>Users:</h2>
+
+        {% for user in users %}
+            <input type="checkbox" name="users[]" value="{{ user.id }}">{{ user.username }}<br>
+        {% endfor %}
+
+        <input type="submit" value="Assign">
+    </form>
+
+{% endblock %}

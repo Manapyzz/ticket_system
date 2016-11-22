@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
+ * @ORM\Entity(repositoryClass="TicketBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
@@ -18,6 +19,12 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var answers
+     * @ORM\OneToMany(targetEntity="Answer", mappedBy="user")
+     */
+    private $answers;
 
     public function __construct()
     {
