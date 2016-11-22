@@ -5,15 +5,15 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
     </head>
     <body>
         <header>
             <a href="{{ path('ticket_index') }}">Return to all the tickets</a>
         </header>
-        {% block body %}{% endblock %}
-        <footer>
-            Ticket System Very Minimal Version Dirty Display
-        </footer>
-        {% block javascripts %}{% endblock %}
+        <body>
+            {% block body %}{% endblock %}
+        </body>
+    {% block javascripts %}{% endblock %}
     </body>
 </html>

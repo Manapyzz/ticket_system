@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <th>Created</th>
-                <td>{% if ticket.created %}{{ ticket.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if ticket.created %}{{ ticket.created|date('Y-m-d H:i:s') }}{% endif %} By {%  for user in ticket.users %}{{ user.username|capitalize }}{% endfor %}</td>
             </tr>
             <tr>
                 <th>Updated</th>
@@ -58,4 +58,5 @@
             {{ form_end(delete_form) }}
         </li>
     </ul>
+
 {% endblock %}

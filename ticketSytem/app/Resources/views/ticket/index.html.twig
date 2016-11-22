@@ -1,45 +1,41 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Tickets list</h1>
-
-    <table>
-        <thead>
+    <div class="container" style="margin-top: 35px">
+        <div class="page-header page-heading">
+            <h1 class="pull-left">Ticket System</h1>
+            <ol class="breadcrumb pull-right where-am-i">
+                <li><a href="{{ path("ticket_new") }}">Create a new ticket</a></li>
+            </ol>
+            <div class="clearfix"></div>
+        </div>
+        <p class="lead">Welcome on this ticket system ! If you encounter any issues, just create a ticket. Please make sure a ticket has not already be opened for your issue before creating a new one.</p>
+        <table class="table forum table-striped">
+            <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Created</th>
-                <th>Updated</th>
-                <th>Actions</th>
+                <th class="cell-stat"></th>
+                <th>
+                    <h3>List of Tickets</h3>
+                </th>
+                <th class="cell-stat text-center hidden-xs hidden-sm">Created</th>
+                <th class="cell-stat text-center hidden-xs hidden-sm">Updated</th>
+                <th class="cell-stat-2x hidden-xs hidden-sm">Created By</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for ticket in tickets %}
-            <tr>
-                <td><a href="{{ path('ticket_show', { 'id': ticket.id }) }}">{{ ticket.id }}</a></td>
-                <td>{{ ticket.title }}</td>
-                <td>{{ ticket.content }}</td>
-                <td>{% if ticket.created %}{{ ticket.created|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if ticket.updated %}{{ ticket.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('ticket_show', { 'id': ticket.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('ticket_edit', { 'id': ticket.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('ticket_new') }}">Create a new ticket</a>
-        </li>
-    </ul>
+            </thead>
+            <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td class="text-center"><i class="fa fa-question fa-2x text-primary"></i></td>
+                    <td>
+                        <h4><a href="{{ path('ticket_show', { 'id': ticket.id }) }}">{{ ticket.title }}</a><br><small>{{ ticket.content|length > 50 ? ticket.content|slice(0, 50) ~ '...' : ticket.content }}</small></h4>
+                    </td>
+                    <td class="text-center hidden-xs hidden-sm">{% if ticket.created %}{{ ticket.created|date('Y-m-d') }}{% endif %}</td>
+                    <td class="text-center hidden-xs hidden-sm">{% if ticket.updated %}{{ ticket.updated|date('Y-m-d') }}{% endif %}{% if ticket.updated is null %}Not updated yet{% endif %}</td>
+                    <td class="hidden-xs hidden-sm">{% for user in ticket.users %}{{ user.username|capitalize }}{% endfor %}<br></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
 {% endblock %}

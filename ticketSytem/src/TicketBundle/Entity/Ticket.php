@@ -59,7 +59,7 @@ class Ticket
      * @ORM\ManyToMany(targetEntity="User", cascade={"persist"})
      * @ORM\JoinTable(name="ticket_user",
      *      joinColumns={@ORM\JoinColumn(name="ticket_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
      *      )
      */
     private $users;
