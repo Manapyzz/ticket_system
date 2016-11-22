@@ -25,24 +25,25 @@
                 <th>Updated</th>
                 <td>{% if ticket.updated %}{{ ticket.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
-            <tr>
-                <th>Answers :</th>
-                {% for answer in answers %}
-                    <td>{{ answer.content }}</td>
-                    <td>
-                        {% if answer.updated is not null %}
-                            Updated on : {{ answer.updated|date('Y-m-d') }}
-                        {% else %}
-                            Created the : {{ answer.created|date('Y-m-d') }}
-                        {% endif %}
-                    </td>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <td><a href="{{ path('answer_edit', {'id': answer.id, 'ticket_id': ticket.id }) }}">Edit answer</a></td>
-                {% endif %}
-                {% endfor %}
-            </tr>
         </tbody>
     </table>
+
+
+    <h4>Answers :</h4>
+    {% for answer in answers %}
+        {{ answer.content }}
+
+            ||| Message Written by: {{ answer.user.username|capitalize }} |
+            {% if answer.updated is not null %}
+                Updated on : {{ answer.updated|date('Y-m-d') }}
+            {% else %}
+                Created the : {{ answer.created|date('Y-m-d') }}
+            {% endif %}
+            <br>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('answer_edit', {'id': answer.id, 'ticket_id': ticket.id }) }}">Edit answer</a><br>
+        {% endif %}
+    {% endfor %}
 
     <ul>
         <li>
